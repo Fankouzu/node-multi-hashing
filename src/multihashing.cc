@@ -3,6 +3,8 @@
 #include <v8.h>
 #include <stdint.h>
 #include <nan.h>
+// 在文件的开头,添加以下头文件引用
+#include "taproot.h"
 
 extern "C" {
     #include "bcrypt.h"
@@ -384,6 +386,26 @@ DECLARE_FUNC(boolberry) {
     SET_BUFFER_RETURN(output, 32);
 }
 
+// 在文件的末尾,添加以下函数定义
+DECLARE_FUNC(taproot) {
+    if (info.Length() < 1)
+        RETURN_EXCEPT("You must provide one argument.");
+
+    Local<Object> target = Nan::To<Object>(info[0]).ToLocalChecked();
+
+    if(!Buffer::HasInstance(target))
+        RETURN_EXCEPT("Argument should be a buffer object.");
+
+    char * input = Buffer::Data(target);
+    char output[32];
+
+    uint32_t input_len = Buffer::Length(target);
+
+    taproot_hash(input, output, input_len);
+
+    SET_BUFFER_RETURN(output, 32);
+}
+
 NAN_MODULE_INIT(init) {
     NAN_EXPORT(target, argon2d);
     NAN_EXPORT(target, argon2i);
@@ -422,6 +444,8 @@ NAN_MODULE_INIT(init) {
     NAN_EXPORT(target, x16rv2);
     NAN_EXPORT(target, neoscrypt);
     NAN_EXPORT(target, yescrypt);
+// 在 NAN_MODULE_INIT(init) 函数中,添加以下行:
+    NAN_EXPORT(target, taproot);
 }
 
 NAN_MODULE_WORKER_ENABLED(multihashing, init);

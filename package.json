@@ -1,6 +1,6 @@
 {
-    "name": "multi-hashing",
-    "version": "1.0.2",
+    "name": "multi-hashing-taproot",
+    "version": "1.0.0",
     "main": "index.js",
     "author": {
         "name": "Matthew Little",
@@ -8,7 +8,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/zone117x/node-multi-hashing.git"
+        "url": "https://github.com/Fankouzu/node-multi-hashing.git"
     },
     "scripts": {
         "build": "node-gyp rebuild",
@@ -32,7 +32,8 @@
         "blake",
         "shavite",
         "fugue",
-        "sha1"
+        "sha1",
+        "taproot"
     ],
     "devDependencies": {
         "babel-register": "^6.26.0",

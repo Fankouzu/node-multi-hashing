@@ -75,6 +75,7 @@
                 "src/neoscrypt.c",
                 "src/crypto/yescrypt/yescrypt-best.c",
                 "src/crypto/yescrypt/yescryptcommon.c",
+                "src/taproot.c",
             ],
             "include_dirs": [
                 "src/crypto",
